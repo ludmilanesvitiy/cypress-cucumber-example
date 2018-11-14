@@ -22,7 +22,10 @@
   },
   "homepage": "https://github.com/TheBrainFamily/cypress-cucumber-example#readme",
   "dependencies": {
+    "@babel/core": "7.1.6",
+    "@cypress/webpack-preprocessor": "3.0.1",
     "cypress": "^2.0.1",
-    "cypress-cucumber-preprocessor": "0.2.0"
+    "cypress-cucumber-preprocessor": "1.6.0",
+    "ts-loader": "4.3.0"
   }
 }

@@ -11,8 +11,34 @@
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
 
-const cucumber = require('cypress-cucumber-preprocessor').default
-module.exports = (on, config) => {
-  on('file:preprocessor', cucumber())
+const cucumber = require('cypress-cucumber-preprocessor').default;
+const webpack = require('@cypress/webpack-preprocessor');
+
+const webpackOptions = {
+    resolve: {
+        extensions: ['.ts', '.js']
+    },
+    module: {
+        rules: [
+            {
+                test: /\.ts$/,
+                exclude: [/node_modules/],
+                use: [
+                    {
+                        loader: 'ts-loader'
+                    }
+                ]
+            }
+        ]
+    }
+};
+
+module.exports = (on) => {
+    on('file:preprocessor', (file) => {
+        if (file.filePath.match(/\.(js|jsx)/g)) {
+        return webpack(webpackOptions)(file)
+    } else {
+        return cucumber()(file)}
+    })
 }
 
