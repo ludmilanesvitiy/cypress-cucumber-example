@@ -36,11 +36,11 @@ const webpackOptions = {
 module.exports = (on) => {
     on('file:preprocessor', (file) => {
         if (file.filePath.match(/\.(js|jsx)/g)) {
-            console.log('111111');
+            console.log('1111111');
             console.log(file.filePath);
         return webpack(webpackOptions)(file)
     } else {
-        console.log('222222');
+        console.log('2222222');
         console.log(file.filePath);
         return cucumber()(file)}
     })
