@@ -14,30 +14,18 @@
 const cucumber = require('cypress-cucumber-preprocessor').default;
 const webpack = require('@cypress/webpack-preprocessor');
 
-const webpackOptions = {
-    resolve: {
-        extensions: ['.ts', '.js']
-    },
-    module: {
-        rules: [
-            {
-                test: /\.ts$/,
-                exclude: [/node_modules/],
-                use: [
-                    {
-                        loader: 'ts-loader'
-                    }
-                ]
-            }
-        ]
-    }
-};
-
 module.exports = (on) => {
+    const options = {
+        webpackOptions: require("./webpack.config.js")
+    }
     on('file:preprocessor', (file) => {
         if (file.filePath.match(/\.(js|jsx)/g)) {
-        return webpack(webpackOptions)(file)
+            console.log('111111');
+            console.log(file.filePath);
+        return webpack(options)(file)
     } else {
+        console.log('222222');
+        console.log(file.filePath);
         return cucumber()(file)}
     })
 }
